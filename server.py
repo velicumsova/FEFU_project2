@@ -3,6 +3,7 @@ import threading
 
 from server_api import ClientSession
 
+
 # примемает запросы от клиента и отвечает на них на server_api
 class Server:
     def __init__(self, ip='127.0.0.1', port=12345):
