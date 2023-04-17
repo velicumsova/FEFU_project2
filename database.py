@@ -1,11 +1,11 @@
 import datetime
 import sqlite3
-
+import json
 import data.config
 
 # пример базы данных (его не объзательно использовать)
-class DatabasePrototype:
-    def __init__(self, path_to_db=data.config.path_to_database):
+class Database:
+    def __init__(self, path_to_db = data.config.path_to_database):
         self.path_to_db = path_to_db
         self.create_table_of_user()
 
@@ -13,6 +13,15 @@ class DatabasePrototype:
     def connection(self):
         return sqlite3.connect(self.path_to_db)
 
+    def user_login(self, login, password):
+        sql = "SELECT * FROM users WHERE login = ? and password = ?"
+        result = self.execute(sql, (login, password), fetchone=True)
+        if result is not None:
+            sql_update = "UPDATE users SET acount_status='active' WHERE user_id=?"
+            self.execute(sql_update, (result.user_id,), commit=True)
+            return True
+        else:
+            return False
     def execute(self, sql: str, parameters: tuple = None, fetchone=False, fetchall=False, commit=False):
         if not parameters:
             parameters = tuple()
@@ -35,15 +44,16 @@ class DatabasePrototype:
 
     def create_table_of_user(self):
         sql = """
-        CREATE TABLE IF NOT EXISTS All_Users (
-        telegram_id int NOT NULL,
-        telegram_username varchar,
-        registration_date varchar,
-        user_status varchar,
-
-        PRIMARY KEY (telegram_id)
-        );
-        """
+        create table `users` (
+          `user_id` AUTOINCREMENT not null,
+          `first_name` VARCHAR(255) not null,
+          `last_name` VARCHAR(255) not null,
+          `login` VARCHAR(255) not null,
+          `password` VARCHAR(255) not null,
+          `acount_status` VARCHAR(255) not null,
+        
+        primary key (`user_id`)
+    )"""
         self.execute(sql, commit=True)
 
     def add_user(self, telegram_id, telegram_username):
@@ -87,7 +97,7 @@ class DatabasePrototype:
         sql = 'SELECT * FROM All_Users WHERE '
         sql, parameters = self.format_args(sql, kwargs)
         return self.execute(sql, parameters, fetchall=True)
-        # пример использования команды select_user(id=131, name='JoJo')
+        # пример использования команды select_user(id=131, name='x')
 
     def update_any_info_about_line(self, user_id, thing_to_change, new_data):
         result = self.select_one_user(telegram_id=user_id)
