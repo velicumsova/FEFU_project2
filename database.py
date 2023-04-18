@@ -13,15 +13,54 @@ class Database:
     def connection(self):
         return sqlite3.connect(self.path_to_db)
 
+    def create_table_of_user(self):
+        sql = """
+        create table `users` (
+          `user_id` AUTOINCREMENT not null,
+          `first_name` VARCHAR(255) not null,
+          `last_name` VARCHAR(255) not null,
+          `login` VARCHAR(255) not null,
+          `password` VARCHAR(255) not null,
+          `login_status` VARCHAR(255) not null,
+
+          primary key (`user_id`)
+    )"""
+        self.execute(sql, commit=True)
+
     def user_login(self, login, password):
         sql = "SELECT * FROM users WHERE login = ? and password = ?"
         result = self.execute(sql, (login, password), fetchone=True)
+
         if result is not None:
-            sql_update = "UPDATE users SET acount_status='active' WHERE user_id=?"
+            sql_update = "UPDATE users SET login_status='active' WHERE user_id=?"
             self.execute(sql_update, (result.user_id,), commit=True)
-            return True
+            print(f"Вы успешно вошли в аккаунт")
         else:
-            return False
+            print(f"Пользователя с такими данными не существует")
+
+    def user_register(self, login, password, first_name, last_name):
+        sql = "SELECT * FROM users WHERE login=?"
+        result = self.execute(sql, (login,), fetchone=True)
+
+        if result is not None:
+            print("Пользователь с таким именем уже зарегистрирован")
+        else:
+            sql_insert = "INSERT INTO users (login, password, first_name, last_name, login_status) VALUES (?, ?, ?, ?, ?)"
+            self.execute(sql_insert, (login, password, first_name, last_name, 'active'), commit=True)
+            print("Вы успешно зарегистрировались")
+
+    def login_status(self, login):
+        sql = "SELECT login_status FROM users WHERE login=?"
+        result = self.execute(sql, (login,), fetchone=True)
+        if result is not None:
+            status = result[0]
+            return status
+        else:
+            return None
+
+    def get_rooms_list(self):
+
+
     def execute(self, sql: str, parameters: tuple = None, fetchone=False, fetchall=False, commit=False):
         if not parameters:
             parameters = tuple()
@@ -50,9 +89,9 @@ class Database:
           `last_name` VARCHAR(255) not null,
           `login` VARCHAR(255) not null,
           `password` VARCHAR(255) not null,
-          `acount_status` VARCHAR(255) not null,
-        
-        primary key (`user_id`)
+          `login_status` VARCHAR(255) not null,
+          
+          primary key (`user_id`)
     )"""
         self.execute(sql, commit=True)
 

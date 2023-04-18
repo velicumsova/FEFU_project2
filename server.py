@@ -4,7 +4,7 @@ from database import Database
 from server_api import ClientSession
 
 
-# примемает запросы от клиента и отвечает на них на server_api
+# принимает запросы от клиента и отвечает на них на server_api
 class Server:
     def __init__(self, ip='127.0.0.1', port=12345):
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -16,7 +16,7 @@ class Server:
         print(f'[+] Ожидается подключение.')
         while True:
             client_socket, addr = self.server.accept()
-            print(f'[+] Новое подключение к скрверу. {addr}')
+            print(f'[+] Новое подключение к серверу. {addr}')
             thread = threading.Thread(target=self.client_handler, args=(client_socket, addr))
             thread.start()
 

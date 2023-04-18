@@ -37,12 +37,12 @@ class ClientSession:
         # command - пример(формат) команды от пользователя + что должна сделать команда + формат ответа
 
         # команды для всех пользователей
-        if command["account_status"] == login:
+        if command["command_name"] == "login":
             command = {
-                account_status: login,
-                item: {
-                    login: '123',
-                    password: '123',
+                'command_name': "login",
+                'args': {
+                    'login': '123',
+                    'password': '123',
                 }
             }
             # Команда должна проверять зарегистрирован ли пользователь с указанными данными.
@@ -81,7 +81,7 @@ class ClientSession:
                 'is_admin': True,
                 'answer_status': 'ok'
             })
-        # команды для пользователей, которые вошли в аккаунт (мы уже знаем их логины, поэтому пользователя не нужно их передавать)
+        # команды для пользователей, которые вошли в аккаунт (мы уже знаем их логины, поэтому пользователю не нужно их передавать)
         elif command['command_name'] == 'get_rooms_list':
             command = {
                 'command_name': 'get_rooms_list',
@@ -94,14 +94,14 @@ class ClientSession:
                     {
                         'room_number': 1, # уникален для каждой комнаты
                         'room_floor': 2,
-                        'occupied': False, # True - комна занята False - комната свободна
+                        'occupied': False, # True - комната занята False - комната свободна
                         'room_resident': '', # ник человека проживающего в комнате (эти данные получает только админ),
                         'reserve_list': ['Gor', 'Nom'] # Список
                     },
                     {
                         'room_number': 4,
                         'room_floor': 54,
-                        'occupied': True,  # True - комна занята False - комната свободна
+                        'occupied': True,  # True - комната занята False - комната свободна
                         'room_resident': 'John',  # ник человека проживающего в комнате (эти данные получает только админ)
                     }
                 ],
