@@ -121,7 +121,8 @@ class Database:
                 'rooms': rooms
             })
 
-# if __name__ == '__main__':
-#     pass
-db = Database()
-db.user_register("zxc", "123", "Gleb", "Kim")
+
+if __name__ == '__main__':
+    db = Database()
+    db.user_register("zxc", "123", "Gleb", "Kim")
+

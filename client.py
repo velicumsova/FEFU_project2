@@ -1,6 +1,7 @@
 import json
 import socket
 
+
 class Client:
     def __init__(self, ip='127.0.0.1', port=12345):
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -21,3 +22,5 @@ if __name__ == '__main__':
     while True:
         res = client.send_message_to_server(input('Введите сообщение:'))
         print(res)
+
+
