@@ -33,17 +33,17 @@ class DatabasePrototype:
 
         return data
 
-    def create_table_of_user(self):
-        sql = """
-        CREATE TABLE IF NOT EXISTS All_Users (
-        telegram_id int NOT NULL,
-        telegram_username varchar,
-        registration_date varchar,
-        user_status varchar,
-
-        PRIMARY KEY (telegram_id)
-        );
-        """
+    # def create_table_of_user(self):
+    #     sql = """
+    #     CREATE TABLE IF NOT EXISTS All_Users (
+    #     telegram_id int NOT NULL,
+    #     telegram_username varchar,
+    #     registration_date varchar,
+    #     user_status varchar,
+    #
+    #     PRIMARY KEY (telegram_id)
+    #     );
+    #     """
         self.execute(sql, commit=True)
 
     def add_user(self, telegram_id, telegram_username):
@@ -101,5 +101,3 @@ class DatabasePrototype:
 
 if __name__ == '__main__':
     pass
-
-
