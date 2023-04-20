@@ -128,3 +128,4 @@ if __name__ == '__main__':
     db.user_register("zxc", "123", "Gleb", "Kim")
     admin =
     db.user_login("zxc", "123")
+
