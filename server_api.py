@@ -45,6 +45,8 @@ class ClientSession:
                     'password': '123',
                 }
             }
+
+            self.database.user_login(command["args"]["login"], command["args"]["password"])
             # Команда должна проверять зарегистрирован ли пользователь с указанными данными.
             # Если да, то меняет статус пользователя
 
@@ -59,8 +61,13 @@ class ClientSession:
                 'args': {
                     'login': '123',
                     'password': '123',
+                    'first_name': "Denis",
+                    'last_name': 'Gusev',
                 }
             }
+            self.client_username = command['args']['login']
+            self.client_password = command['args']['password']
+            self.database.user_register(command["args"]["login"], command["args"]["password"], command["args"]["first_name"], command["args"]["last_name"]),
             # Команда должна регистрировать пользователя с указанными данными.
             # Если такого пользователя нет, то регистрировать его
 
@@ -73,6 +80,7 @@ class ClientSession:
             command = {
                 'command_name': 'login_status',
             }
+            self.database.login_status(self.client_username)
             # Команда должна проверять текущий статус пользователя
 
             return json.dumps({
@@ -86,6 +94,7 @@ class ClientSession:
             command = {
                 'command_name': 'get_rooms_list',
             }
+            self.database.get_rooms_list(self.client_username)
             # получаем список всех комнат
 
             return json.dumps({
