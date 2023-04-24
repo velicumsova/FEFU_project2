@@ -9,7 +9,6 @@ class Database:
         self.path_to_db = path_to_db
         self.create_table_of_rooms()
         self.create_table_of_users()
-        self.admin_account
 
 
     @property
@@ -77,7 +76,7 @@ class Database:
             #     'answer_status': 'ok'
             # })
 
-    def user_register(self, login, password, first_name, last_name):
+    def user_register(self, login, password, first_name, last_name, admin_status=False):
         sql = "SELECT * FROM users WHERE login=?"
         result = self.execute(sql, (login,), fetchone=True)
 
@@ -126,6 +125,7 @@ class Database:
 if __name__ == '__main__':
     db = Database()
     db.user_register("zxc", "123", "Gleb", "Kim")
-    admin =
+    admin = Database()
+    admin.user_register("Stepik", "456", "Stepan", "Kot", admin_status=True)
     db.user_login("zxc", "123")
 
