@@ -9,7 +9,6 @@ class Database:
         self.path_to_db = path_to_db
         self.create_table_of_rooms()
         self.create_table_of_users()
-        self.admin_account
 
 
     @property
