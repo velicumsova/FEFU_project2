@@ -129,3 +129,4 @@ if __name__ == '__main__':
     admin = Database()
     admin.user_register("Stepik", "456", "Stepan", "Kot", admin_status=True)
     db.user_login("zxc", "123")
+
