@@ -1,0 +1,650 @@
+import time
+import os
+import keyboard
+from keyboard import KeyboardEvent
+import json
+def clear_console():
+    os.system('cls' if os.name=='nt' else 'clear')
+# keyboard.block_key('w')
+# keyboard.block_key('a')
+# keyboard.block_key('s')
+# keyboard.block_key('d')
+# keyboard.block_key('q')
+class Draw:
+    def StartMenu(self):
+        i = 0
+        key = KeyboardEvent(event_type='down', scan_code=0, name='w')
+        while (key.name != 'enter'):
+            if key.name == 'w':
+                choice = 0
+                while i < 40:
+                    j = 0
+                    while j < 100:
+                        if (i == 0 and j == 0) or (i == 10 and j == 29) or (i == 20 and j == 29):
+                            print("\u250f", end='')  # левый верхний угол
+                        elif (i == 0 and j == 99) or (i == 10 and j == 69) or (i == 20 and j == 69):  # правый угол
+                            print("\u2513", end='')
+                        elif (i == 39 and j == 0) or (i == 15 and j == 29) or (i == 25 and j == 29):
+                            print("\u2517", end='')
+                        elif (i == 39 and j == 99) or (i == 15 and j == 69) or (i == 25 and j == 69):
+                            print("\u251b", end='')
+                        elif (i == 0 or i == 39):  # горизонталь
+                            print("\u2501", end='')
+                        elif j == 0 or j == 99:  # вертикаль
+                            print("\u2503", end='')
+                        elif (i == 10 or i == 15) and (29 < j < 69):  # горизонталь
+                            print("\u2501", end='')
+                        elif (j == 29 or j == 69) and (10 < i < 15):  # вертикаль
+                            print("\u2503", end='')
+                        elif (i == 12 and j == 40):  # текст вход
+                            print("Нажмите, чтобы войти.", end='')
+                            j += 20
+                        elif (i == 20 or i == 25) and (29 < j < 69):  # горизонталь
+                            print("\u2501", end='')
+                        elif (j == 29 or j == 69) and (20 < i < 25):  # вертикаль
+                            print("\u2503", end='')
+                        elif (i == 22 and j == 33):  # текст registration
+                            print("Нажмите, чтобы зарегистрироваться.", end='')
+                            j += 33
+                        else:
+                            print(" ", end='')
+                        j = j + 1
+                    print()
+                    i = i + 1
+            if key.name == 's':
+                choice = 1
+                while i < 40:
+                    j = 0
+                    while j < 100:
+                        if (i == 0 and j == 0) or (i == 10 and j == 29) or (i == 20 and j == 29):
+                            print("\u250f", end='')  # левый верхний угол
+                        elif (i == 0 and j == 99) or (i == 10 and j == 69) or (i == 20 and j == 69):  # правый угол
+                            print("\u2513", end='')
+                        elif (i == 39 and j == 0) or (i == 15 and j == 29) or (i == 25 and j == 29):
+                            print("\u2517", end='')
+                        elif (i == 39 and j == 99) or (i == 15 and j == 69) or (i == 25 and j == 69):
+                            print("\u251b", end='')
+                        elif (i == 0 or i == 39):  # горизонталь
+                            print("\u2501", end='')
+                        elif j == 0 or j == 99:  # вертикаль
+                            print("\u2503", end='')
+                        elif (i == 10 or i == 15) and (29 < j < 69):  # горизонталь
+                            print("\u2501", end='')
+                        elif (j == 29 or j == 69) and (10 < i < 15):  # вертикаль
+                            print("\u2503", end='')
+                        elif (i == 12 and j == 40):  # текст вход
+                            print("Нажмите, чтобы войти.", end='')
+                            j += 20
+                        elif (i == 20 or i == 25) and (29 < j < 69):  # горизонталь
+                            print("\u2501", end='')
+                        elif (j == 29 or j == 69) and (20 < i < 25):  # вертикаль
+                            print("\u2503", end='')
+                        elif (i == 22 and j == 33):  # текст registration
+                            print("Нажмите, чтобы зарегистрироваться.", end='')
+                            j += 33
+                        else:
+                            print(" ", end='')
+                        j = j + 1
+                    print()
+                    i = i + 1
+            clear_console()
+            key = keyboard.read_event()
+        return choice
+    def LogIn(self):
+        clear_console()
+        i = 0
+        while i < 40:
+            j = 0
+            while j < 100:
+                if (i == 0 and j == 0) or (i == 10 and j == 29) or (i == 20 and j == 29):
+                    print("\u250f", end='')  # левый верхний угол
+                elif (i == 0 and j == 99) or (i == 10 and j == 69) or (i == 20 and j == 69):  # правый угол
+                    print("\u2513", end='')
+                elif (i == 39 and j == 0) or (i == 15 and j == 29) or (i == 25 and j == 29):
+                    print("\u2517", end='')
+                elif (i == 39 and j == 99) or (i == 15 and j == 69) or (i == 25 and j == 69):
+                    print("\u251b", end='')
+                elif (i == 0 or i == 39):  # горизонталь
+                    print("\u2501", end='')
+                elif j == 0 or j == 99:  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 10 or i == 15) and (29 < j < 69):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 29 or j == 69) and (10 < i < 15):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 8 and j == 45):
+                    print("Вход", end='')
+                    j += 3
+                elif (i == 12 and j == 35):  # текст вход
+                    print("Введите логин:", end='')
+                    j += 13
+                elif (i == 20 or i == 25) and (29 < j < 69):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 29 or j == 69) and (20 < i < 25):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 22 and j == 35):  # текст registration
+                    print("Введите пароль:", end='')
+                    j += 14
+                else:
+                    print(" ", end='')
+                j = j + 1
+            print()
+            i = i + 1
+    def SignUp(self):
+        clear_console()
+        i = 0
+        while i < 40:
+            j = 0
+            while j < 100:
+                if (i == 0 and j == 0):
+                    print("\u250f", end='')  # левый верхний угол
+                elif (i == 0 and j == 99):  # правый угол
+                    print("\u2513", end='')
+                elif (i == 39 and j == 0):
+                    print("\u2517", end='')
+                elif (i == 39 and j == 99):
+                    print("\u251b", end='')
+                elif (i == 0 or i == 39):  # горизонталь
+                    print("\u2501", end='')
+                elif j == 0 or j == 99:  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 6 and j == 35):
+                    print("Просмотр уведомлений", end='')
+                    j += 19
+                else:
+                    print(" ", end='')
+                j = j + 1
+            print()
+            i = i + 1
+    def GuestMenu(self):
+        clear_console()
+        i = 0
+        while i < 40:
+            j = 0
+            while j < 100:
+                if (i == 0 and j == 0) or (i == 10 and j == 25) or (i == 18 and j == 25) or (i == 26 and j == 25) or (
+                        i == 2 and j == 90):
+                    print("\u250f", end='')  # левый верхний угол
+                elif (i == 0 and j == 99) or (i == 10 and j == 70) or (i == 18 and j == 70) or (
+                        i == 26 and j == 70) or (i == 2 and j == 95):  # правый угол
+                    print("\u2513", end='')
+                elif (i == 39 and j == 0) or (i == 14 and j == 25) or (i == 22 and j == 25) or (
+                        i == 30 and j == 25) or (i == 4 and j == 90):
+                    print("\u2517", end='')
+                elif (i == 39 and j == 99) or (i == 14 and j == 70) or (i == 22 and j == 70) or (
+                        i == 30 and j == 70) or (i == 4 and j == 95):
+                    print("\u251b", end='')
+                elif (i == 0 or i == 39):  # горизонталь
+                    print("\u2501", end='')
+                elif j == 0 or j == 99:  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 10 or i == 14) and (25 < j < 70):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 25 or j == 70) and (10 < i < 14):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 12 and j == 30):  # окно 1
+                    print("Просмотреть список комнат", end='')
+                    j += 24
+                elif (i == 6 and j == 40):
+                    print("Здравствуйте, login!", end='')
+                    j += 19
+                elif (i == 18 or i == 22) and (25 < j < 70):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 25 or j == 70) and (18 < i < 22):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 20 and j == 30):  # окно 2
+                    print("Зарезервировать комнату", end='')
+                    j += 22
+                elif (i == 26 or i == 30) and (25 < j < 70):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 25 or j == 70) and (26 < i < 30):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 28 and j == 30):  # окно 1
+                    print("Информация о статусе проживания", end='')
+                    j += 30
+                elif (i == 2 or i == 4) and (90 < j < 95):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 90 or j == 95) and (2 < i < 4):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 3 and j == 92):  # уведомление
+                    print("@", end='')
+                else:
+                    print(" ", end='')
+                j = j + 1
+            print()
+            i = i + 1
+    def AdminMenu(self):
+        clear_console()
+        i = 0
+        while i < 40:
+            j = 0
+            while j < 100:
+                if (i == 0 and j == 0) or (i == 10 and j == 25) or (i == 18 and j == 25) or (i == 26 and j == 25) or (
+                        i == 2 and j == 90):
+                    print("\u250f", end='')  # левый верхний угол
+                elif (i == 0 and j == 99) or (i == 10 and j == 70) or (i == 18 and j == 70) or (
+                        i == 26 and j == 70) or (i == 2 and j == 95):  # правый угол
+                    print("\u2513", end='')
+                elif (i == 39 and j == 0) or (i == 14 and j == 25) or (i == 22 and j == 25) or (
+                        i == 30 and j == 25) or (i == 4 and j == 90):
+                    print("\u2517", end='')
+                elif (i == 39 and j == 99) or (i == 14 and j == 70) or (i == 22 and j == 70) or (
+                        i == 30 and j == 70) or (i == 4 and j == 95):
+                    print("\u251b", end='')
+                elif (i == 0 or i == 39):  # горизонталь
+                    print("\u2501", end='')
+                elif j == 0 or j == 99:  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 10 or i == 14) and (25 < j < 70):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 25 or j == 70) and (10 < i < 14):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 12 and j == 30):  # окно 1
+                    print("Просмотреть список комнат", end='')
+                    j += 24
+                elif (i == 6 and j == 40):
+                    print("Здравствуйте, login!", end='')
+                    j += 19
+                elif (i == 18 or i == 22) and (25 < j < 70):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 25 or j == 70) and (18 < i < 22):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 20 and j == 30):  # окно 2
+                    print("Зарезервировать комнату", end='')
+                    j += 22
+                elif (i == 26 or i == 30) and (25 < j < 70):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 25 or j == 70) and (26 < i < 30):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 28 and j == 30):  # окно 1
+                    print("Информация о статусе проживания", end='')
+                    j += 30
+                elif (i == 2 or i == 4) and (90 < j < 95):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 90 or j == 95) and (2 < i < 4):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 3 and j == 92):  # уведомление
+                    print("@", end='')
+                else:
+                    print(" ", end='')
+                j = j + 1
+            print()
+            i = i + 1
+    def RoomsTable(self):
+        clear_console()
+        i = 0
+        while i < 40:
+            j = 0
+            while j < 100:
+                if (i == 0 and j == 0) or (i == 9 and j == 8) or (i == 2 and j == 90) or (i == 9 and j == 20) or (
+                        i == 9 and j == 32) or (i == 9 and j == 44) or (i == 9 and j == 56) or (i == 16 and j == 8) or (
+                        i == 16 and j == 20) or (i == 16 and j == 32) or (i == 16 and j == 44) or (
+                        i == 16 and j == 56) or (i == 23 and j == 8) or (i == 23 and j == 20) or (
+                        i == 23 and j == 32) or (i == 23 and j == 44) or (i == 23 and j == 56):
+                    print("\u250f", end='')  # левый верхний угол
+                elif (i == 0 and j == 99) or (i == 9 and j == 14) or (i == 2 and j == 95) or (i == 9 and j == 26) or (
+                        i == 9 and j == 38) or (i == 9 and j == 50) or (i == 9 and j == 62) or (
+                        i == 16 and j == 14) or (i == 16 and j == 26) or (i == 16 and j == 38) or (
+                        i == 16 and j == 50) or (i == 16 and j == 62) or (i == 23 and j == 14) or (
+                        i == 23 and j == 26) or (i == 23 and j == 38) or (i == 23 and j == 50) or (i == 23 and j == 62):
+                    print("\u2513", end='')  # правый угол
+                elif (i == 39 and j == 0) or (i == 12 and j == 8) or (i == 4 and j == 90) or (i == 12 and j == 20) or (
+                        i == 12 and j == 32) or (i == 12 and j == 44) or (i == 12 and j == 56) or (
+                        i == 19 and j == 8) or (i == 19 and j == 20) or (i == 19 and j == 32) or (
+                        i == 19 and j == 44) or (i == 19 and j == 56) or (i == 26 and j == 8) or (
+                        i == 26 and j == 20) or (i == 26 and j == 32) or (i == 26 and j == 44) or (i == 26 and j == 56):
+                    print("\u2517", end='')  # левый нижний
+                elif (i == 39 and j == 99) or (i == 12 and j == 14) or (i == 4 and j == 95) or (
+                        i == 12 and j == 26) or (i == 12 and j == 38) or (i == 12 and j == 50) or (
+                        i == 12 and j == 62) or (i == 19 and j == 14) or (i == 19 and j == 26) or (
+                        i == 19 and j == 38) or (i == 19 and j == 50) or (i == 19 and j == 62) or (
+                        i == 26 and j == 14) or (i == 26 and j == 26) or (i == 26 and j == 38) or (
+                        i == 26 and j == 50) or (i == 26 and j == 62):
+                    print("\u251b", end='')  # правый нижний
+                elif (i == 0 or i == 39):  # горизонталь
+                    print("\u2501", end='')
+                elif j == 0 or j == 99:  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 5 and j == 35):
+                    print("Просмотр списка комнат", end='')
+                    j += 21
+                elif (i == 7 and j == 10):
+                    print("1 этаж", end='')
+                    j += 5
+                elif (i == 9 or i == 12) and (8 < j < 14):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 8 or j == 14) and (9 < i < 12):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 10 and j == 11):
+                    print("1", end='')
+                elif (i == 9 or i == 12) and (20 < j < 26):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 20 or j == 26) and (9 < i < 12):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 10 and j == 23):
+                    print("2", end='')
+                elif (i == 9 or i == 12) and (32 < j < 38):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 32 or j == 38) and (9 < i < 12):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 10 and j == 35):
+                    print("3", end='')
+                elif (i == 9 or i == 12) and (44 < j < 50):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 44 or j == 50) and (9 < i < 12):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 10 and j == 47):
+                    print("4", end='')
+                elif (i == 9 or i == 12) and (56 < j < 62):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 56 or j == 62) and (9 < i < 12):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 10 and j == 59):
+                    print("5", end='')
+                elif (i == 14 and j == 10):
+                    print("2 этаж", end='')
+                    j += 5
+                elif (i == 16 or i == 19) and (8 < j < 14):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 8 or j == 14) and (16 < i < 19):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 17 and j == 11):
+                    print("1", end='')
+                elif (i == 16 or i == 19) and (20 < j < 26):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 20 or j == 26) and (16 < i < 19):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 17 and j == 23):
+                    print("2", end='')
+                elif (i == 16 or i == 19) and (32 < j < 38):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 32 or j == 38) and (16 < i < 19):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 17 and j == 35):
+                    print("3", end='')
+                elif (i == 16 or i == 19) and (44 < j < 50):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 44 or j == 50) and (16 < i < 19):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 17 and j == 47):
+                    print("4", end='')
+                elif (i == 16 or i == 19) and (56 < j < 62):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 56 or j == 62) and (16 < i < 19):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 17 and j == 59):
+                    print("5", end='')
+                elif (i == 21 and j == 10):
+                    print("3 этаж", end='')
+                    j += 5
+                elif (i == 23 or i == 26) and (8 < j < 14):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 8 or j == 14) and (23 < i < 26):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 24 and j == 11):
+                    print("1", end='')
+                elif (i == 23 or i == 26) and (20 < j < 26):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 20 or j == 26) and (23 < i < 26):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 24 and j == 23):
+                    print("2", end='')
+                elif (i == 23 or i == 26) and (32 < j < 38):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 32 or j == 38) and (23 < i < 26):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 24 and j == 35):
+                    print("3", end='')
+                elif (i == 23 or i == 26) and (44 < j < 50):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 44 or j == 50) and (23 < i < 26):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 24 and j == 47):
+                    print("4", end='')
+                elif (i == 23 or i == 26) and (56 < j < 62):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 56 or j == 62) and (23 < i < 26):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 24 and j == 59):
+                    print("5", end='')
+                elif (i == 2 or i == 4) and (90 < j < 95):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 90 or j == 95) and (2 < i < 4):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 3 and j == 92):  # уведомление
+                    print("@", end='')
+                else:
+                    print(" ", end='')
+                j = j + 1
+            print()
+            i = i + 1
+    def RoomBooking(self):
+        clear_console()
+        i = 0
+        while i < 40:
+            j = 0
+            while j < 100:
+                if (i == 0 and j == 0) or (i == 10 and j == 25) or (i == 18 and j == 25) or (i == 2 and j == 90):
+                    print("\u250f", end='')  # левый верхний угол
+                elif (i == 0 and j == 99) or (i == 10 and j == 70) or (i == 18 and j == 70) or (
+                        i == 2 and j == 95):  # правый угол
+                    print("\u2513", end='')
+                elif (i == 39 and j == 0) or (i == 14 and j == 25) or (i == 22 and j == 25) or (i == 4 and j == 90):
+                    print("\u2517", end='')
+                elif (i == 39 and j == 99) or (i == 14 and j == 70) or (i == 22 and j == 70) or (i == 4 and j == 95):
+                    print("\u251b", end='')
+                elif (i == 0 or i == 39):  # горизонталь
+                    print("\u2501", end='')
+                elif j == 0 or j == 99:  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 10 or i == 14) and (25 < j < 70):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 25 or j == 70) and (10 < i < 14):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 12 and j == 30):  # окно 1
+                    print("Этаж", end='')
+                    j += 3
+                elif (i == 6 and j == 40):
+                    print("Зарезервировать комнату", end='')
+                    j += 22
+                elif (i == 18 or i == 22) and (25 < j < 70):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 25 or j == 70) and (18 < i < 22):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 20 and j == 30):  # окно 2
+                    print("Номер", end='')
+                    j += 4
+                elif (i == 2 or i == 4) and (90 < j < 95):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 90 or j == 95) and (2 < i < 4):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 3 and j == 92):  # уведомление
+                    print("@", end='')
+                else:
+                    print(" ", end='')
+                j = j + 1
+            print()
+            i = i + 1
+    def GuestStatus(self):
+        clear_console()
+        i = 0
+        while i < 40:
+            j = 0
+            while j < 100:
+                if (i == 0 and j == 0) or (i == 10 and j == 25) or (i == 18 and j == 25) or (i == 26 and j == 25) or (
+                        i == 2 and j == 90):
+                    print("\u250f", end='')  # левый верхний угол
+                elif (i == 0 and j == 99) or (i == 10 and j == 70) or (i == 18 and j == 70) or (
+                        i == 26 and j == 70) or (i == 2 and j == 95):  # правый угол
+                    print("\u2513", end='')
+                elif (i == 39 and j == 0) or (i == 14 and j == 25) or (i == 22 and j == 25) or (
+                        i == 30 and j == 25) or (i == 4 and j == 90):
+                    print("\u2517", end='')
+                elif (i == 39 and j == 99) or (i == 14 and j == 70) or (i == 22 and j == 70) or (
+                        i == 30 and j == 70) or (i == 4 and j == 95):
+                    print("\u251b", end='')
+                elif (i == 0 or i == 39):  # горизонталь
+                    print("\u2501", end='')
+                elif j == 0 or j == 99:  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 10 or i == 14) and (25 < j < 70):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 25 or j == 70) and (10 < i < 14):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 12 and j == 30):  # окно 1
+                    print("Этаж", end='')
+                    j += 3
+                elif (i == 5 and j == 30):
+                    print("Информация о вашем статусе проживания", end='')
+                    j += 36
+                elif (i == 18 or i == 22) and (25 < j < 70):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 25 or j == 70) and (18 < i < 22):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 20 and j == 30):  # окно 2
+                    print("Номер", end='')
+                    j += 4
+                elif (i == 26 or i == 30) and (25 < j < 70):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 25 or j == 70) and (26 < i < 30):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 28 and j == 30):  # окно 3
+                    print("Статус комнаты", end='')
+                    j += 13
+                elif (i == 2 or i == 4) and (90 < j < 95):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 90 or j == 95) and (2 < i < 4):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 3 and j == 92):  # уведомление
+                    print("@", end='')
+                else:
+                    print(" ", end='')
+                j = j + 1
+            print()
+            i = i + 1
+    def GuestsList(self):
+        clear_console()
+        i = 0
+        while i < 40:
+            j = 0
+            while j < 100:
+                if (i == 0 and j == 0) or (i == 2 and j == 90):
+                    print("\u250f", end='')  # левый верхний угол
+                elif (i == 0 and j == 99) or (i == 2 and j == 95):  # правый угол
+                    print("\u2513", end='')
+                elif (i == 39 and j == 0) or (i == 4 and j == 90):
+                    print("\u2517", end='')
+                elif (i == 39 and j == 99) or (i == 4 and j == 95):
+                    print("\u251b", end='')
+                elif (i == 0 or i == 39):  # горизонталь
+                    print("\u2501", end='')
+                elif j == 0 or j == 99:  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 6 and j == 35):
+                    print("Просмотр списка гостей", end='')
+                    j += 21
+                elif (i == 2 or i == 4) and (90 < j < 95):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 90 or j == 95) and (2 < i < 4):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 3 and j == 92):  # уведомление
+                    print("@", end='')
+                else:
+                    print(" ", end='')
+                j = j + 1
+            print()
+            i = i + 1
+    def ManageBooking(self):
+        clear_console()
+        i = 0
+        while i < 40:
+            j = 0
+            while j < 100:
+                if (i == 0 and j == 0) or (i == 10 and j == 25) or (i == 18 and j == 25) or (i == 26 and j == 25) or (
+                        i == 2 and j == 90) or (i == 34 and j == 25):
+                    print("\u250f", end='')  # левый верхний угол
+                elif (i == 0 and j == 99) or (i == 10 and j == 70) or (i == 18 and j == 70) or (
+                        i == 26 and j == 70) or (i == 2 and j == 95) or (i == 34 and j == 70):  # правый угол
+                    print("\u2513", end='')
+                elif (i == 39 and j == 0) or (i == 14 and j == 25) or (i == 22 and j == 25) or (
+                        i == 30 and j == 25) or (i == 4 and j == 90) or (i == 38 and j == 25):
+                    print("\u2517", end='')
+                elif (i == 39 and j == 99) or (i == 14 and j == 70) or (i == 22 and j == 70) or (
+                        i == 30 and j == 70) or (i == 4 and j == 95) or (i == 38 and j == 70):
+                    print("\u251b", end='')
+                elif (i == 0 or i == 39):  # горизонталь
+                    print("\u2501", end='')
+                elif j == 0 or j == 99:  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 10 or i == 14) and (25 < j < 70):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 25 or j == 70) and (10 < i < 14):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 12 and j == 30):  # окно 1
+                    print("Логин гостя", end='')
+                    j += 10
+                elif (i == 7 and j == 35):
+                    print("Управление бронированием", end='')
+                    j += 23
+                elif (i == 18 or i == 22) and (25 < j < 70):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 25 or j == 70) and (18 < i < 22):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 20 and j == 30):  # окно 2
+                    print("Этаж", end='')
+                    j += 3
+                elif (i == 26 or i == 30) and (25 < j < 70):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 25 or j == 70) and (26 < i < 30):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 28 and j == 30):  # окно 3
+                    print("Номер", end='')
+                    j += 4
+                elif (i == 34 or i == 38) and (25 < j < 70):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 25 or j == 70) and (34 < i < 38):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 36 and j == 30):  # окно 4
+                    print("Статус комнаты", end='')
+                    j += 13
+                elif (i == 2 or i == 4) and (90 < j < 95):  # горизонталь
+                    print("\u2501", end='')
+                elif (j == 90 or j == 95) and (2 < i < 4):  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 3 and j == 92):  # уведомление
+                    print("@", end='')
+                else:
+                    print(" ", end='')
+                j = j + 1
+            print()
+            i = i + 1
+    def Notifications(self):
+        clear_console()
+        i = 0
+        while i < 40:
+            j = 0
+            while j < 100:
+                if (i == 0 and j == 0):
+                    print("\u250f", end='')  # левый верхний угол
+                elif (i == 0 and j == 99):  # правый угол
+                    print("\u2513", end='')
+                elif (i == 39 and j == 0):
+                    print("\u2517", end='')
+                elif (i == 39 and j == 99):
+                    print("\u251b", end='')
+                elif (i == 0 or i == 39):  # горизонталь
+                    print("\u2501", end='')
+                elif j == 0 or j == 99:  # вертикаль
+                    print("\u2503", end='')
+                elif (i == 6 and j == 35):
+                    print("Просмотр уведомлений", end='')
+                    j += 19
+                else:
+                    print(" ", end='')
+                j = j + 1
+            print()
+            i = i + 1
+Draw=Draw()
+choice = Draw.StartMenu()
+print(choice)
+input()
